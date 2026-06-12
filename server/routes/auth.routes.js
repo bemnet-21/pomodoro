@@ -3,9 +3,8 @@ import { login, signup } from '../controller/auth.controller.js';
 
 const router = express.Router();
 
-console.log("Auth Routes Loaded") // Debugging log
 /**
- * @openapi
+ * @swagger
  * /api/auth/signup:
  *   post:
  *     tags:
@@ -40,7 +39,7 @@ console.log("Auth Routes Loaded") // Debugging log
 router.post('/signup', signup);
 
 /**
- * @openapi
+ * @swagger
  * /api/auth/login:
  *   post:
  *     tags:

@@ -1,4 +1,10 @@
 import swaggerJsdoc from 'swagger-jsdoc';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const routesGlob = path.resolve(__dirname, 'routes', '*.js').replace(/\\/g, '/');
 
 const options = {
   definition: {
@@ -15,6 +21,13 @@ const options = {
       },
     ],
     components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
       schemas: {
         SignupRequest: {
           type: 'object',
@@ -54,10 +67,76 @@ const options = {
             error: { type: 'string', example: 'Invalid email or password' },
           },
         },
+        SessionCreateRequest: {
+          type: 'object',
+          required: ['taskName', 'sessionType', 'startTime', 'endTime', 'actualDurationSeconds', 'plannedDurationSeconds'],
+          properties: {
+            taskName: { type: 'string', example: 'Write API docs' },
+            sessionType: { type: 'string', enum: ['work', 'short-break', 'long-break'], example: 'work' },
+            status: { type: 'string', enum: ['completed', 'abandoned'], example: 'completed' },
+            startTime: { type: 'string', format: 'date-time', example: '2026-06-12T18:00:00.000Z' },
+            endTime: { type: 'string', format: 'date-time', example: '2026-06-12T18:25:00.000Z' },
+            actualDurationSeconds: { type: 'integer', example: 1500 },
+            plannedDurationSeconds: { type: 'integer', example: 1500 },
+          },
+        },
+        Session: {
+          type: 'object',
+          properties: {
+            _id: { type: 'string', example: '6848a7aa1f95e4dd4e5dd1b2' },
+            user: { type: 'string', example: '6848a7aa1f95e4dd4e5dd1aa' },
+            taskName: { type: 'string', example: 'Write API docs' },
+            sessionType: { type: 'string', example: 'work' },
+            status: { type: 'string', example: 'completed' },
+            startTime: { type: 'string', format: 'date-time' },
+            endTime: { type: 'string', format: 'date-time' },
+            actualDurationSeconds: { type: 'integer', example: 1500 },
+            plannedDurationSeconds: { type: 'integer', example: 1500 },
+            tags: {
+              type: 'array',
+              items: { type: 'string' },
+              example: ['deep-work', 'backend'],
+            },
+            focusRating: { type: 'integer', minimum: 1, maximum: 5, example: 4 },
+            distractions: { type: 'integer', example: 1 },
+            createdAt: { type: 'string', format: 'date-time' },
+            updatedAt: { type: 'string', format: 'date-time' },
+          },
+        },
+        SessionCreateResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Session created successfully' },
+            data: { $ref: '#/components/schemas/Session' },
+          },
+        },
+        SessionListResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Sessions retrieved successfully' },
+            data: {
+              type: 'array',
+              items: { $ref: '#/components/schemas/Session' },
+            },
+          },
+        },
+        SessionDetailResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Session retrieved successfully' },
+            data: { $ref: '#/components/schemas/Session' },
+          },
+        },
+        DeleteSessionResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Session deleted successfully' },
+          },
+        },
       },
     },
   },
-  apis: ['./routes/*.js'],
+  apis: [routesGlob],
 };
 
 const swaggerSpec = swaggerJsdoc(options);

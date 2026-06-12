@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -23,5 +24,8 @@
     "swagger-ui-express": "^5.0.1",
     "zod": "^4.4.3"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^10.5.0"
+  }
 }
