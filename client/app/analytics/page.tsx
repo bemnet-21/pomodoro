@@ -54,7 +54,7 @@ export default function AnalyticsPage() {
   const summary: SummaryData = summaryData?.data.data || {};
   console.log("Summary Data:", summary);
 
-  const { data: recentLogsData, error: recentLogsError, isLoading: recentLogsLoading } = useSWR("recentLogs", getRecentSessionLogs)
+  const { data: recentLogsData, error: recentLogsError, isLoading: recentLogsLoading } = useSWR("recentLogs", () => getRecentSessionLogs(5));
   const recent: RecentLog[] = recentLogsData?.data.data || [];
   console.log("Recent Logs Data:", recent);
 
