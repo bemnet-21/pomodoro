@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: "http://localhost:5000/api"
+    baseURL: "https://pomodoro-t90v.onrender.com/api"
 })
 
 apiClient.interceptors.request.use((config) => {
