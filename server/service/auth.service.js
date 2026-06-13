@@ -23,3 +23,11 @@ export const loginService = async (email, password) => {
     }
     return { id: foundUser._id, username: foundUser.username, email: foundUser.email }
 }
+
+export const getUserByIdService = async (userId) => {
+    const user = await User.findById(userId).select('-password -settings -stats')
+    if(!user) {
+        throw new AppError("User not found", 404)
+    }
+    return user
+}

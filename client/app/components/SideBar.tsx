@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, FileText, Settings, Timer, type LucideIcon } from "lucide-react";
+import { BarChart3, FileText, Timer, User, type LucideIcon } from "lucide-react";
 
 const SideBar = () => {
   const pathname = usePathname();
@@ -24,9 +24,9 @@ const SideBar = () => {
       path: "/logs"
     },
     {
-      label: "Settings",
-      icon: Settings,
-      path: "/settings"
+      label: "Profile",
+      icon: User,
+      path: "/profile"
     },
   ] satisfies Array<{ label: string; icon: LucideIcon; path: string }>;
 

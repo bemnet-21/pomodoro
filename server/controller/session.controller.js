@@ -15,7 +15,7 @@ const sessionSchema = z.object({
     startTime: z.string().refine(dateStr => !isNaN(Date.parse(dateStr)), "Invalid start time"),
     endTime: z.string().refine(dateStr => !isNaN(Date.parse(dateStr)), "Invalid end time"),
     actualDurationSeconds: z.number().int().positive("Actual duration must be a positive integer"),
-    plannedDurationSeconds: z.number().int().positive("Planned duration must be a positive integer")
+    plannedDurationSeconds: z.number().int().positive("Planned duration must be a positive integer"),
 })
 export const createSession = async (req, res) => {
     try {

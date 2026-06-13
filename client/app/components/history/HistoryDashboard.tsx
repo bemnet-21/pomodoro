@@ -23,7 +23,6 @@ type SortOption = 'date-desc' | 'date-asc' | 'duration-desc';
 
 export interface NewLog {
     taskName: string;
-    tags: string[];
     sessionType: 'work' | 'short-break' | 'long-break';
     actualDurationSeconds: number;
     startTime: string; 

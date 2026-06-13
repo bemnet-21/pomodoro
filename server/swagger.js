@@ -14,6 +14,12 @@ const options = {
       version: '1.0.0',
       description: 'API documentation for the Pomodoro backend',
     },
+    tags: [
+      { name: 'Auth', description: 'Authentication and account endpoints' },
+      { name: 'Session', description: 'Pomodoro session tracking endpoints' },
+      { name: 'User', description: 'User settings and summary endpoints' },
+      { name: 'Analytics', description: 'Analytics and insights endpoints' },
+    ],
     servers: [
       {
         url: 'http://localhost:5000',
@@ -59,6 +65,33 @@ const options = {
               },
             },
             token: { type: 'string', example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' },
+          },
+        },
+        UserProfile: {
+          type: 'object',
+          properties: {
+            _id: { type: 'string', example: '6848a7aa1f95e4dd4e5dd1b2' },
+            username: { type: 'string', example: 'john_doe' },
+            email: { type: 'string', format: 'email', example: 'john@example.com' },
+            settings: { $ref: '#/components/schemas/UserSettings' },
+            stats: {
+              type: 'object',
+              properties: {
+                totalFocusMinutes: { type: 'integer', example: 420 },
+                sessionsCompleted: { type: 'integer', example: 28 },
+                currentStreak: { type: 'integer', example: 5 },
+                lastActive: { type: 'string', format: 'date-time', example: '2026-06-12T18:25:00.000Z' },
+              },
+            },
+            createdAt: { type: 'string', format: 'date-time' },
+            updatedAt: { type: 'string', format: 'date-time' },
+          },
+        },
+        AuthMeResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'User retrieved successfully' },
+            user: { $ref: '#/components/schemas/UserProfile' },
           },
         },
         ErrorResponse: {

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { loginService, signupService } from '../service/auth.service.js';
+import { getUserByIdService, loginService, signupService } from '../service/auth.service.js';
 import { generateToken } from '../utils/generateToken.js';
 import { AppError } from '../utils/AppError.js';
 
@@ -56,6 +56,24 @@ export const login = async (req, res) => {
             token
         })
 
+    } catch(err) {
+        console.error(err)
+        if(err instanceof AppError) {
+            res.status(err.statusCode).json({ error: err.message })
+        } else {
+            res.status(500).json({ error: "Internal Server Error" })
+        }
+    }
+}
+
+export const me = async (req, res) => {
+    try {
+        const userId = req.user.id
+        const user = await getUserByIdService(userId)
+        res.status(200).json({
+            message: "User retrieved successfully",
+            user
+        })
     } catch(err) {
         console.error(err)
         if(err instanceof AppError) {
