@@ -1,5 +1,5 @@
 import express from 'express';
-import { login, me, signup } from '../controller/auth.controller.js';
+import { changePassword, login, me, signup } from '../controller/auth.controller.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -110,5 +110,54 @@ router.post('/login', login);
  *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/me', protect, me)
+
+/**
+ * @swagger
+ * /api/auth/change-password:
+ *   post:
+ *     tags:
+ *       - Auth
+ *     summary: Change password for authenticated user
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ChangePasswordRequest'
+ *     responses:
+ *       200:
+ *         description: Password updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ChangePasswordResponse'
+ *       400:
+ *         description: Validation error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.post('/change-password', protect, changePassword);
 
 export default router;

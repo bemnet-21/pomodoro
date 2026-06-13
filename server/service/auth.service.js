@@ -31,3 +31,19 @@ export const getUserByIdService = async (userId) => {
     }
     return user
 }
+
+export const changePasswordService = async (userId, currentPassword, newPassword) => {
+    const user = await User.findById(userId)
+    if(!user) {
+        throw new AppError("User not found", 404)
+    }
+    const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password)
+    if(!isCurrentPasswordValid) {
+        throw new AppError("Current password is incorrect", 400)
+    }
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10)
+    user.password = hashedNewPassword
+    await user.save()
+
+    return { message: "Password changed successfully" }
+}

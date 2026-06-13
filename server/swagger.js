@@ -52,6 +52,14 @@ const options = {
             password: { type: 'string', minLength: 6, example: 'secret123' },
           },
         },
+        ChangePasswordRequest: {
+          type: 'object',
+          required: ['currentPassword', 'newPassword'],
+          properties: {
+            currentPassword: { type: 'string', minLength: 6, example: 'oldSecret123' },
+            newPassword: { type: 'string', minLength: 6, example: 'newSecret456' },
+          },
+        },
         AuthSuccessResponse: {
           type: 'object',
           properties: {
@@ -92,6 +100,12 @@ const options = {
           properties: {
             message: { type: 'string', example: 'User retrieved successfully' },
             user: { $ref: '#/components/schemas/UserProfile' },
+          },
+        },
+        ChangePasswordResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Password changed successfully' },
           },
         },
         ErrorResponse: {
