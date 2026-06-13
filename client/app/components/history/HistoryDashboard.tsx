@@ -5,6 +5,8 @@ import { Search, Plus, Trash2, Calendar, ChevronDown, Clock } from 'lucide-react
 import { formatTime } from '@/util/formatter';
 import ManualLogForm from './ManualLogForm';
 import { addSessionLog, deleteSessionLog } from '@/app/api/session.service';
+import AlertModal from '../ui/AlertModal';
+import ConfirmModal from '../ui/ConfirmModal';
 
 export interface SessionLog {
   _id: string;
@@ -27,9 +29,13 @@ export interface NewLog {
     actualDurationSeconds: number;
     startTime: string; 
     endTime: string;
-    status: string;
+    status: 'completed' | 'abandoned';
     plannedDurationSeconds: number;
   }
+
+export type CreateSessionPayload = Omit<NewLog, 'status'> & {
+  status: 'completed';
+};
 
 export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps) {
   const [logs, setLogs] = useState<SessionLog[]>(initialLogs);
@@ -37,6 +43,8 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
   const [sortBy, setSortBy] = useState<SortOption>('date-desc');
   const [currentPage, setCurrentPage] = useState(1);
   const [showManualForm, setShowManualForm] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
   
   const itemsPerPage = 10;
 
@@ -44,7 +52,7 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
 
   const handleAddLog = async (log: Omit<SessionLog, '_id'>) => {
   try {
-    const payload: NewLog = {
+    const payload: CreateSessionPayload = {
       ...log,
       plannedDurationSeconds: log.actualDurationSeconds,
       endTime: new Date(Date.parse(log.startTime) + log.actualDurationSeconds * 1000).toISOString(),
@@ -53,28 +61,33 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
 
     const res = await addSessionLog(payload);
 
-    if (res.status !== 201) throw new Error('API returned an error');
+    if (res.status < 200 || res.status >= 300) throw new Error('API returned an error');
 
     setLogs((prevLogs) => [res.data.data, ...prevLogs]);
     setShowManualForm(false);
     setCurrentPage(1);
 
   } catch (error) {
-    alert('Failed to add the log. Please try again.');
+    setModalMessage('Failed to add the log. Please try again.');
     console.error('Add Log Error:', error);
   }
 };
 
-  const handleDeleteLog = async (id: string, name: string) => {
-    if (confirm(`Are you sure you want to delete the log for "${name}"? This action cannot be undone.`)) {
-        const res = await deleteSessionLog(id);
-        if (res.status === 200) {
-          setLogs(logs.filter((log) => log._id !== id));
-        } else {
-          alert('Failed to delete the log. Please try again.');
-        }
+  const handleDeleteLog = (id: string, name: string) => {
+    setPendingDelete({ id, name });
+  };
+
+  const confirmDeleteLog = async () => {
+    if (!pendingDelete) return;
+
+    const res = await deleteSessionLog(pendingDelete.id);
+    if (res.status === 200) {
+      setLogs(logs.filter((log) => log._id !== pendingDelete.id));
+    } else {
+      setModalMessage('Failed to delete the log. Please try again.');
     }
-    
+
+    setPendingDelete(null);
   };
 
   const filteredLogs = useMemo(() => {
@@ -101,6 +114,22 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
 
   return (
     <div className="space-y-6">
+      <AlertModal
+        open={Boolean(modalMessage)}
+        title="Request Failed"
+        message={modalMessage}
+        onClose={() => setModalMessage('')}
+      />
+      <ConfirmModal
+        open={Boolean(pendingDelete)}
+        title="Delete Log"
+        message={pendingDelete ? `Are you sure you want to delete the log for "${pendingDelete.name}"? This action cannot be undone.` : ''}
+        confirmText="Delete"
+        cancelText="Cancel"
+        danger
+        onConfirm={confirmDeleteLog}
+        onCancel={() => setPendingDelete(null)}
+      />
       
       <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
         <div className="flex flex-wrap items-center gap-3 flex-1 max-w-3xl">
