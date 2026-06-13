@@ -48,7 +48,6 @@ export const login = async (req, res) => {
         }
         const result = await loginService(parsedData.data.email, parsedData.data.password)
         const userData = { id: result.id, username: result.username, email: result.email }
-        console.log("User Data for Token Generation:", userData) // Debugging log
         const token = generateToken(userData)
         
         res.status(200).json({

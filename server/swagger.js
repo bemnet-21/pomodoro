@@ -182,6 +182,73 @@ const options = {
             data: { $ref: '#/components/schemas/UserSummary' },
           },
         },
+        AnalyticsHeatmapItem: {
+          type: 'object',
+          properties: {
+            _id: { type: 'string', example: '2026-06-12' },
+            count: { type: 'integer', example: 4 },
+          },
+        },
+        AnalyticsHeatmapResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Heatmap data retrieved successfully' },
+            data: {
+              type: 'array',
+              items: { $ref: '#/components/schemas/AnalyticsHeatmapItem' },
+            },
+          },
+        },
+        AnalyticsWeeklyStatsItem: {
+          type: 'object',
+          properties: {
+            _id: { type: 'integer', minimum: 1, maximum: 7, example: 6 },
+            totalMinutes: { type: 'number', example: 75 },
+            date: { type: 'string', format: 'date-time', example: '2026-06-12T18:00:00.000Z' },
+          },
+        },
+        AnalyticsWeeklyStatsResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Weekly stats data retrieved successfully' },
+            data: {
+              type: 'array',
+              items: { $ref: '#/components/schemas/AnalyticsWeeklyStatsItem' },
+            },
+          },
+        },
+        AnalyticsDistributionItem: {
+          type: 'object',
+          properties: {
+            _id: { type: 'string', example: 'backend' },
+            totalMinutes: { type: 'number', example: 210 },
+          },
+        },
+        AnalyticsDistributionResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Distribution data retrieved successfully' },
+            data: {
+              type: 'array',
+              items: { $ref: '#/components/schemas/AnalyticsDistributionItem' },
+            },
+          },
+        },
+        AnalyticsScore: {
+          type: 'object',
+          properties: {
+            score: { type: 'integer', minimum: 0, maximum: 100, example: 87 },
+            totalStarted: { type: 'integer', example: 23 },
+            totalCompleted: { type: 'integer', example: 20 },
+          },
+        },
+        AnalyticsScoreResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Score data retrieved successfully' },
+            data: { $ref: '#/components/schemas/AnalyticsScore' },
+          },
+        },
       },
     },
   },
