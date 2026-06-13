@@ -1,13 +1,32 @@
 import React from 'react';
+import Link from 'next/link';
 import { User, Mail, Calendar, Shield } from 'lucide-react';
 import type { UserProfile } from '@/app/types/profile';
 
 interface AccountDetailsProps {
-  user: UserProfile
-  ;
+  user: UserProfile;
+  error: Error;
+  isLoading: boolean;
 }
 
-export default function AccountDetails({ user }: AccountDetailsProps) {
+export default function AccountDetails({ user, error, isLoading }: AccountDetailsProps) {
+
+  
+  if (error) {
+    return (
+      <div className="bg-primary/10 border border-primary/30 p-4 rounded">
+        <p className="text-sm text-primary font-medium">Failed to load user details. Please try again later.</p>
+      </div>
+    );  
+
+  }
+  if (isLoading) {
+    return (
+      <div className="bg-[#111] border border-[#1F1F1F] p-4 rounded">
+        <p className="text-sm text-white font-medium">Loading user details...</p>
+      </div>
+    );
+  }
   return (
     <section className="bg-[#111] border border-[#1F1F1F] p-6 rounded-xl">
       <div className="mb-6 flex justify-between items-start">
@@ -54,9 +73,12 @@ export default function AccountDetails({ user }: AccountDetailsProps) {
       </div>
 
       <div className="mt-8 pt-6 border-t border-[#1F1F1F]">
-        <button className="w-full flex items-center justify-center gap-2 bg-transparent border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 font-mono text-xs py-2.5 px-4 rounded transition-all">
+        <Link
+          href="/profile/change-password"
+          className="w-full flex items-center justify-center gap-2 bg-transparent border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 font-mono text-xs py-2.5 px-4 rounded transition-all"
+        >
           <Shield className="w-4 h-4" /> CHANGE PASSWORD
-        </button>
+        </Link>
       </div>
     </section>
   );

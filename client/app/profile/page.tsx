@@ -1,19 +1,12 @@
 "use client";
 
-import React, { useState } from 'react';
 import AccountDetails from '../components/profile/AccountDetails';
 import TimerSettings from '../components/profile/TimerSettings';
 import type { UserProfile, UserSettings } from '../types/profile';
 import { getUserSettings, updateUserSettings } from '../api/user.service';
 import useSWR from 'swr';
+import { getProfile } from '../api/auth.service';
 
-// --- MOCK DATA ---
-const MOCK_USER: UserProfile = {
-  _id: "u_987654321",
-  username: "ChronosDev",
-  email: "developer@chronosfocus.com",
-  createdAt: "2023-08-15T10:00:00Z"
-};
 
 const DEFAULT_SETTINGS: UserSettings = {
   workDuration: 25,
@@ -27,9 +20,10 @@ const DEFAULT_SETTINGS: UserSettings = {
 
 
 export default function ProfilePage() {
-  const [user] = useState<UserProfile>(MOCK_USER);
+  const { data: userData, error: userError, isLoading: userLoading } = useSWR('user', getProfile)
+  const user: UserProfile = userData?.data?.user
+  console.log("Fetched user profile:", user);
 
-  // --- API HANDLER MOCKS ---
   const handleUpdateSettings = async (newSettings: Partial<UserSettings>) => {
     const res = await updateUserSettings(newSettings);
     if (res.status !== 200) {
@@ -56,7 +50,7 @@ export default function ProfilePage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-4 space-y-6">
-            <AccountDetails user={user} />
+            <AccountDetails user={user} error={userError} isLoading={userLoading} />
           </div>
 
           <div className="lg:col-span-8 space-y-6">
