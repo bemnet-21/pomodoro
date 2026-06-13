@@ -15,7 +15,7 @@
 
 <p align="center">
   <a href="https://pomodoro-t90v.onrender.com/api-docs"> Live API Docs</a> ·
-  <a href="#"> Live Demo</a> ·
+  <a href="https://pomodoro-six-green.vercel.app/"> Live Demo</a> ·
   <a href="#architecture"> Architecture</a> ·
   <a href="#key-engineering-decisions"> Engineering Decisions</a>
 </p>
