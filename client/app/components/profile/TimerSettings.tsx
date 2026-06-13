@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Clock, Save } from 'lucide-react';
-import type { UserSettings } from '@/app/types/profile';
+import type { UserSettings } from '../../types/profile';
 
 interface TimerSettingsProps {
   settings: UserSettings;

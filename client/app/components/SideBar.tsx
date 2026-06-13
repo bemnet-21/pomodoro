@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { BarChart3, FileText, Timer, User, type LucideIcon } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { BarChart3, FileText, LogOut, Timer, User, type LucideIcon } from "lucide-react";
+import { useAuthStore } from "@/app/store/authStore";
 
 const SideBar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const logout = useAuthStore((state) => state.logout);
 
   const ITEMS = [
     {
@@ -29,6 +32,11 @@ const SideBar = () => {
       path: "/profile"
     },
   ] satisfies Array<{ label: string; icon: LucideIcon; path: string }>;
+
+  const handleLogout = () => {
+    logout();
+    router.replace("/login");
+  };
 
   return (
     <aside className="sticky top-0 flex h-screen w-72 shrink-0 flex-col rounded-r-2xl border-r border-primary/20 bg-surface/90 px-5 py-7 backdrop-blur">
@@ -63,9 +71,16 @@ const SideBar = () => {
       })}
       </nav>
 
-      <p className="border-t border-primary/15 pt-4 text-xs font-mono tracking-wide text-text-secondary/70">
-        Stay in flow.
-      </p>
+      <div className="space-y-3 border-t border-primary/15 pt-4">
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="flex w-full items-center gap-2 rounded-lg border border-primary/20 px-3 py-2 font-mono text-xs text-text-secondary/80 transition hover:border-primary/35 hover:text-white"
+        >
+          <LogOut size={14} /> Logout
+        </button>
+        <p className="text-xs font-mono tracking-wide text-text-secondary/70">Stay in flow.</p>
+      </div>
     </aside>
   );
 };

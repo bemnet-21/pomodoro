@@ -1,7 +1,7 @@
 import apiClient from "./client"
 
-export const login = async (username: string, password: string) => {
-    return await apiClient.post("/auth/login", { username, password })
+export const login = async (email: string, password: string) => {
+    return await apiClient.post("/auth/login", { email, password })
 }
 
 export const signup = async (username: string, email: string, password: string) => {

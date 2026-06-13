@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { User, Mail, Calendar, Shield } from 'lucide-react';
-import type { UserProfile } from '@/app/types/profile';
+import type { UserProfile } from '../../types/profile';
 
 interface AccountDetailsProps {
   user: UserProfile;
