@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import swaggerUi from 'swagger-ui-express';
 import authRoutes from './routes/auth.routes.js';
 import sessionRoutes from './routes/session.routes.js';
+import userRoutes from './routes/user.routes.js';
 import swaggerSpec from './swagger.js';
 
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/session', sessionRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get('/api-docs.json', (req, res) => {
   res.status(200).json(swaggerSpec);

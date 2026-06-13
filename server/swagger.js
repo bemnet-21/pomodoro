@@ -133,6 +133,55 @@ const options = {
             message: { type: 'string', example: 'Session deleted successfully' },
           },
         },
+        UserSettings: {
+          type: 'object',
+          properties: {
+            workDuration: { type: 'integer', minimum: 1, maximum: 180, example: 25 },
+            shortBreak: { type: 'integer', minimum: 1, maximum: 60, example: 5 },
+            longBreak: { type: 'integer', minimum: 1, maximum: 60, example: 15 },
+            longBreakInterval: { type: 'integer', minimum: 1, maximum: 10, example: 4 },
+            autoStartBreaks: { type: 'boolean', example: false },
+            autoStartWork: { type: 'boolean', example: false },
+            alarmSound: { type: 'string', example: 'digital_bell' },
+            volume: { type: 'integer', minimum: 0, maximum: 100, example: 50 },
+          },
+        },
+        UserSettingsUpdateRequest: {
+          type: 'object',
+          properties: {
+            workDuration: { type: 'integer', minimum: 1, maximum: 180, example: 30 },
+            shortBreak: { type: 'integer', minimum: 1, maximum: 60, example: 5 },
+            longBreak: { type: 'integer', minimum: 1, maximum: 60, example: 20 },
+            longBreakInterval: { type: 'integer', minimum: 1, maximum: 10, example: 4 },
+            autoStartBreaks: { type: 'boolean', example: true },
+            autoStartWork: { type: 'boolean', example: false },
+            alarmSound: { type: 'string', example: 'digital_bell' },
+            volume: { type: 'integer', minimum: 0, maximum: 100, example: 70 },
+          },
+        },
+        UserSettingsResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'User settings retrieved successfully' },
+            data: { $ref: '#/components/schemas/UserSettings' },
+          },
+        },
+        UserSummary: {
+          type: 'object',
+          properties: {
+            currentStreak: { type: 'integer', example: 3 },
+            totalFocusHours: { type: 'integer', example: 42 },
+            totalSessions: { type: 'integer', example: 120 },
+            lastActive: { type: 'string', format: 'date-time', example: '2026-06-12T18:25:00.000Z' },
+          },
+        },
+        UserSummaryResponse: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'User summary retrieved successfully' },
+            data: { $ref: '#/components/schemas/UserSummary' },
+          },
+        },
       },
     },
   },

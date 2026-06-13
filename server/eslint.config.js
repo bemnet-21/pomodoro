@@ -15,6 +15,9 @@ export default [
     },
     rules: {
       'no-undef': 'error',
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-unreachable': 'error',
+      'no-redeclare': 'error',
     },
   },
 ];
