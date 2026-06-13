@@ -38,3 +38,8 @@ body {
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 }
+
+@theme inline {
+  --font-mono: var(--font-geist-mono);
+  --font-geist: var(--font-geist)
+}

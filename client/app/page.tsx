@@ -1,9 +1,10 @@
-import Image from "next/image";
+import { Play, RefreshCcw } from "lucide-react";
+import CounterCard from "./components/CounterCard";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-background">
-      
+    <main className="flex min-h-full items-center justify-center">
+      <CounterCard />
     </main>
   );
 }
