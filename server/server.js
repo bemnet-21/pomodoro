@@ -26,6 +26,10 @@ app.get('/api-docs.json', (req, res) => {
   res.status(200).json(swaggerSpec);
 });
 
+app.get('/ping', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Pomodoro API is running' });
 });
