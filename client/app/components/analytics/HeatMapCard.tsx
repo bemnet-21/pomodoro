@@ -87,8 +87,8 @@ export default function Heatmap({ data }: HeatmapProps) {
   };
 
   return (
-    <section className="bg-background border border-[#1F1F1F] p-6 rounded-xl relative overflow-hidden">
-      <div className="flex justify-between items-end mb-6">
+    <section className="relative overflow-hidden rounded-xl border border-[#1F1F1F] bg-background p-4 sm:p-6">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h3 className="text-sm font-mono text-gray-400 uppercase tracking-[0.2em]">Focus Intensity</h3>
           <p className="text-xs text-gray-600 mt-1">Sessions completed over the last year</p>
@@ -102,7 +102,8 @@ export default function Heatmap({ data }: HeatmapProps) {
         </div>
       </div>
 
-      <div className="relative">
+      <div className="relative overflow-x-auto pb-1">
+        <div className="min-w-xl sm:min-w-2xl">
         {/* Month Labels */}
         <div
           className="grid text-[10px] text-gray-600 font-mono mb-2"
@@ -135,6 +136,7 @@ export default function Heatmap({ data }: HeatmapProps) {
               ))}
             </div>
           ))}
+        </div>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 
 import AccountDetails from '../components/profile/AccountDetails';
 import TimerSettings from '../components/profile/TimerSettings';
+import AutomationSettings from '../components/profile/AutomationSettings';
 import type { UserProfile, UserSettings } from '../types/profile';
 import { getUserSettings, updateUserSettings } from '../api/user.service';
 import useSWR from 'swr';
@@ -41,11 +42,11 @@ export default function ProfilePage() {
   
 
   return (
-    <div className="min-h-screen bg-background text-white py-10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <header className="mb-10">
+    <div className="min-h-screen bg-background py-6 text-white sm:py-8 lg:py-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <header className="mb-8 sm:mb-10">
           <span className="text-primary font-mono text-xs tracking-widest uppercase">Identity & Config</span>
-          <h1 className="text-4xl font-bold tracking-tighter mt-2">User Profile</h1>
+          <h1 className="mt-2 text-3xl font-bold tracking-tighter sm:text-4xl">User Profile</h1>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -61,6 +62,7 @@ export default function ProfilePage() {
               error={settingsError}
               isLoading={settingsLoading}
             />
+            <AutomationSettings settings={settings} onSave={handleUpdateSettings} />
           </div>
         </div>
       </div>

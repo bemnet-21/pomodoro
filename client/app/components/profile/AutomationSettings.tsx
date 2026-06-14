@@ -28,10 +28,10 @@ export default function AutomationSettings({ settings, onSave }: AutomationSetti
 
       <div className="space-y-6">
         {/* Toggle 1 */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-sm text-white font-medium">Auto-Start Breaks</p>
-            <p className="text-[10px] font-mono text-gray-500 mt-1 max-w-62.5">
+            <p className="mt-1 max-w-full text-[10px] font-mono text-gray-500 sm:max-w-62.5">
               Automatically begin the break timer when a focus session completes.
             </p>
           </div>
@@ -46,10 +46,10 @@ export default function AutomationSettings({ settings, onSave }: AutomationSetti
         </div>
 
         {/* Toggle 2 */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-sm text-white font-medium">Auto-Start Focus</p>
-            <p className="text-[10px] font-mono text-gray-500 mt-1 max-w-62.5">
+            <p className="mt-1 max-w-full text-[10px] font-mono text-gray-500 sm:max-w-62.5">
               Automatically begin the next focus session when a break ends.
             </p>
           </div>

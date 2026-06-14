@@ -61,10 +61,10 @@ export default function AnalyticsPage() {
   if (error) return <div className="p-6">Failed to load analytics.</div>;
   if (isLoading) return <div className="p-6">Loading analytics...</div>;
   return (
-    <div className="p-6 lg:p-10 max-w-7xl mx-auto space-y-6 bg-background min-h-screen text-white">
-      <header className="mb-10">
+    <div className="mx-auto min-h-screen max-w-7xl space-y-6 bg-background px-4 py-6 text-white sm:px-6 lg:px-10 lg:py-10">
+      <header className="mb-8 sm:mb-10">
         <span className="text-primary font-mono text-xs tracking-widest uppercase">Performance Metrics</span>
-        <h1 className="text-4xl font-bold tracking-tighter mt-2">Analytics</h1>
+        <h1 className="mt-2 text-3xl font-bold tracking-tighter sm:text-4xl">Analytics</h1>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">

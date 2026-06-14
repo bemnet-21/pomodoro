@@ -29,7 +29,7 @@ export default function AccountDetails({ user, error, isLoading }: AccountDetail
   }
   return (
     <section className="bg-[#111] border border-[#1F1F1F] p-6 rounded-xl">
-      <div className="mb-6 flex justify-between items-start">
+      <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <span className="font-mono text-[10px] text-primary uppercase tracking-widest block mb-1">
             Authentication
@@ -72,10 +72,10 @@ export default function AccountDetails({ user, error, isLoading }: AccountDetail
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-[#1F1F1F]">
+      <div className="mt-8 border-t border-[#1F1F1F] pt-6">
         <Link
           href="/profile/change-password"
-          className="w-full flex items-center justify-center gap-2 bg-transparent border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 font-mono text-xs py-2.5 px-4 rounded transition-all"
+          className="flex w-full items-center justify-center gap-2 rounded border border-gray-700 bg-transparent px-4 py-2.5 text-xs font-mono text-gray-400 transition-all hover:border-gray-500 hover:text-white"
         >
           <Shield className="w-4 h-4" /> CHANGE PASSWORD
         </Link>

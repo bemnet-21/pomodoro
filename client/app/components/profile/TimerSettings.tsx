@@ -55,7 +55,7 @@ export default function TimerSettings({ settings, onSave, error, isLoading }: Ti
   }
   return (
     <section className="bg-[#111] border border-[#1F1F1F] p-6 rounded-xl">
-      <div className="mb-6 flex justify-between items-end">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <span className="font-mono text-[10px] text-primary uppercase tracking-widest block mb-1">
             Time Architecture
@@ -68,7 +68,7 @@ export default function TimerSettings({ settings, onSave, error, isLoading }: Ti
           <button 
             onClick={handleSave}
             disabled={isSaving}
-            className="flex items-center gap-1.5 bg-primary text-black font-mono font-bold text-[10px] uppercase px-4 py-2 rounded hover:bg-primary/80 transition-all disabled:opacity-50"
+            className="flex w-full items-center justify-center gap-1.5 rounded bg-primary px-4 py-2 text-[10px] font-bold font-mono uppercase text-black transition-all hover:bg-primary/80 disabled:opacity-50 sm:w-auto"
           >
             <Save className="w-3.5 h-3.5" /> {isSaving ? 'Saving...' : 'Apply Changes'}
           </button>
@@ -117,17 +117,17 @@ export default function TimerSettings({ settings, onSave, error, isLoading }: Ti
       </div>
 
       {/* Interval Setting */}
-      <div className="mt-8 pt-6 border-t border-[#1F1F1F] flex items-center justify-between">
+      <div className="mt-8 flex flex-col gap-4 border-t border-[#1F1F1F] pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-white font-medium">Long Break Interval</p>
           <p className="text-[10px] font-mono text-gray-500 mt-1">Trigger long break after X sessions</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex w-full items-center gap-3 sm:w-auto">
           <input 
             type="range" min="2" max="10" 
             value={localSettings.longBreakInterval}
             onChange={(e) => handleChange('longBreakInterval', e.target.value)}
-            className="w-32 accent-primary"
+            className="w-full accent-primary sm:w-32"
           />
           <span className="w-6 text-center font-mono font-bold text-white">
             {localSettings.longBreakInterval}

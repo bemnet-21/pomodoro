@@ -5,7 +5,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { BarChart3, FileText, LogOut, Timer, User, type LucideIcon } from "lucide-react";
 import { useAuthStore } from "@/app/store/authStore";
 
-const SideBar = () => {
+interface SideBarProps {
+  className?: string;
+  onNavigate?: () => void;
+}
+
+const SideBar = ({ className = "", onNavigate }: SideBarProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const logout = useAuthStore((state) => state.logout);
@@ -36,10 +41,11 @@ const SideBar = () => {
   const handleLogout = () => {
     logout();
     router.replace("/login");
+    onNavigate?.();
   };
 
   return (
-    <aside className="sticky top-0 flex h-screen w-72 shrink-0 flex-col rounded-r-2xl border-r border-primary/20 bg-surface/90 px-5 py-7 backdrop-blur">
+    <aside className={`sticky top-0 flex h-screen w-72 shrink-0 flex-col rounded-r-2xl border-r border-primary/20 bg-surface/90 px-5 py-7 backdrop-blur ${className}`}>
       <h1 className="text-sm font-semibold tracking-[0.22em] text-text-primary">POMODORO</h1>
 
       <nav className="mt-8 flex flex-1 flex-col gap-2">
@@ -50,6 +56,7 @@ const SideBar = () => {
           <Link
             key={item.label}
             href={item.path}
+            onClick={onNavigate}
             className={`group flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left font-mono transition ${
               isActive
                 ? "border-primary/40 text-text-primary"

@@ -15,7 +15,7 @@ export default function StreakStats({ data, error, isLoading }: StreakStatsProps
   if (isLoading) return <div className="p-6">Loading...</div>;
   if (error) return <div className="p-6">Failed to load streak stats.</div>;  
   return (
-    <section className="bg-primary/5 border border-primary/20 p-6 rounded-xl flex flex-col justify-between h-full relative overflow-hidden">
+    <section className="relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-primary/20 bg-primary/5 p-4 sm:p-6">
       {/* Background glow effect */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-primary opacity-10 blur-3xl rounded-full pointer-events-none"></div>
 
@@ -28,7 +28,7 @@ export default function StreakStats({ data, error, isLoading }: StreakStatsProps
         <div>
           <p className="text-primary/70 font-mono text-[10px] uppercase">Current Streak</p>
           <div className="flex items-baseline gap-2 mt-1">
-            <span className="text-6xl font-bold text-primary tracking-tighter">
+            <span className="text-5xl font-bold tracking-tighter text-primary sm:text-6xl">
               {data.currentStreak}
             </span>
             <span className="text-lg font-bold text-white">Days</span>

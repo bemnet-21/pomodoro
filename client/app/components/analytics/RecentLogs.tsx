@@ -32,8 +32,8 @@ export default function RecentLogs({ logs, error, isLoading }: RecentLogsProps) 
   }
   
   return (
-    <section className="bg-[#111] border border-[#1F1F1F] rounded-xl overflow-hidden">
-      <div className="p-6 border-b border-[#1F1F1F] flex justify-between items-center">
+    <section className="overflow-hidden rounded-xl border border-[#1F1F1F] bg-[#111]">
+      <div className="flex flex-col gap-3 border-b border-[#1F1F1F] p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
         <div>
           <span className="font-mono text-[10px] text-primary uppercase tracking-widest">Raw Data</span>
           <h3 className="font-bold text-lg text-white mt-1">Activity Ledger</h3>
@@ -44,7 +44,7 @@ export default function RecentLogs({ logs, error, isLoading }: RecentLogsProps) 
       </div>
 
       <div className="overflow-x-auto scrollbar-hide">
-        <table className="w-full text-left">
+        <table className="w-full min-w-xl text-left sm:min-w-2xl md:min-w-4xl">
           <thead>
             <tr className="text-[10px] font-mono text-gray-500 uppercase border-b border-[#1F1F1F] bg-background/50">
               <th className="px-6 py-4 font-normal tracking-wider">Task Context</th>
@@ -56,7 +56,7 @@ export default function RecentLogs({ logs, error, isLoading }: RecentLogsProps) 
           <tbody className="text-sm">
             {logs.map((log) => (
               <tr key={log._id} className="border-b border-[#1F1F1F]/50 hover:bg-white/2 transition-colors">
-                <td className="px-6 py-4 font-medium text-white max-w-50 truncate">
+                <td className="max-w-48 truncate px-4 py-4 font-medium text-white sm:max-w-50 sm:px-6">
                   {log.taskName}
                 </td>
                 <td className="px-6 py-4">

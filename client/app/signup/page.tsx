@@ -78,12 +78,12 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-white py-10">
-      <div className="mx-auto flex min-h-[80vh] w-full max-w-7xl items-center px-6 lg:px-10">
-        <section className="w-full max-w-xl rounded-xl border border-[#1F1F1F] bg-[#111] p-6">
+    <div className="min-h-screen bg-background py-6 text-white sm:py-8 lg:py-10">
+      <div className="mx-auto flex min-h-[80vh] w-full max-w-7xl items-center px-4 sm:px-6 lg:px-10">
+        <section className="w-full max-w-xl rounded-xl border border-[#1F1F1F] bg-[#111] p-5 sm:p-6">
           <header className="mb-6">
             <span className="font-mono text-xs uppercase tracking-widest text-primary">Authentication</span>
-            <h1 className="mt-2 text-4xl font-bold tracking-tighter">Create Account</h1>
+            <h1 className="mt-2 text-3xl font-bold tracking-tighter sm:text-4xl">Create Account</h1>
             <p className="mt-2 text-sm text-gray-400">Sign up to start tracking focused sessions.</p>
           </header>
 
@@ -136,7 +136,7 @@ export default function SignupPage() {
 
             {error && <p className="text-sm text-red-400">{error}</p>}
 
-            <div className="flex items-center justify-between gap-3 pt-1">
+            <div className="flex flex-col items-start justify-between gap-3 pt-1 sm:flex-row sm:items-center">
               <button
                 type="submit"
                 disabled={isSubmitting}

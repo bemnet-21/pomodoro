@@ -111,6 +111,13 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
   const totalPages = Math.ceil(filteredLogs.length / itemsPerPage) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedLogs = filteredLogs.slice(startIndex, startIndex + itemsPerPage);
+  const formatLogDate = (value: string) =>
+    new Date(value).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
 
   return (
     <div className="space-y-6">
@@ -131,10 +138,10 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
         onCancel={() => setPendingDelete(null)}
       />
       
-      <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
-        <div className="flex flex-wrap items-center gap-3 flex-1 max-w-3xl">
+      <div className="flex flex-col items-stretch gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex w-full flex-wrap items-center gap-3 md:max-w-3xl">
           
-          <div className="relative flex-1 min-w-50">
+          <div className="relative min-w-0 flex-1">
             <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-500" />
             <input
               type="text"
@@ -145,11 +152,11 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
             />
           </div>
 
-          <div className="relative">
+          <div className="relative w-full sm:w-auto">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="appearance-none bg-[#111] border border-[#1F1F1F] rounded pl-3.5 pr-8 py-2 text-xs font-mono text-gray-400 focus:outline-none focus:border-primary/50 cursor-pointer uppercase"
+              className="w-full appearance-none rounded border border-[#1F1F1F] bg-[#111] py-2 pl-3.5 pr-8 text-xs font-mono uppercase text-gray-400 cursor-pointer focus:border-primary/50 focus:outline-none sm:w-auto"
             >
               <option value="date-desc">NEWEST FIRST</option>
               <option value="date-asc">OLDEST FIRST</option>
@@ -161,7 +168,7 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
 
         <button
           onClick={() => setShowManualForm(!showManualForm)}
-          className="flex items-center justify-center gap-2 bg-primary text-black font-mono font-bold text-xs py-2 px-5 rounded hover:bg-primary/80 transition-all"
+          className="flex items-center justify-center gap-2 rounded bg-primary px-5 py-2 text-xs font-bold font-mono text-black transition-all hover:bg-primary/80 md:w-auto"
         >
           <Plus className="w-4 h-4 stroke-[3px]" /> MANUAL ENTRY
         </button>
@@ -175,8 +182,33 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
       )}
 
       <section className="bg-[#111] border border-[#1F1F1F] rounded-xl overflow-hidden pb-4">
-        <div className="w-full overflow-x-auto scrollbar-hide">
-          <table className="w-full text-left text-sm">
+        <div className="md:hidden space-y-3 p-3">
+          {paginatedLogs.length === 0 ? (
+            <p className="py-10 text-center text-xs font-mono text-gray-600">NO LOGS FOUND WITH CURRENT FILTERS.</p>
+          ) : (
+            paginatedLogs.map((log) => (
+              <article key={log._id} className="rounded-lg border border-[#1F1F1F] bg-black/20 p-3">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="line-clamp-2 text-sm font-bold text-white">{log.taskName}</h3>
+                  <button
+                    onClick={() => handleDeleteLog(log._id, log.taskName)}
+                    className="grid size-9 shrink-0 place-items-center rounded border border-[#1F1F1F] text-gray-500 transition hover:border-red-500/60 hover:text-red-500"
+                    aria-label="Delete log"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+                <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-mono text-gray-400">
+                  <p>Duration: <span className="text-gray-200">{formatTime(log.actualDurationSeconds)}</span></p>
+                  <p className="text-right">{formatLogDate(log.startTime)}</p>
+                </div>
+              </article>
+            ))
+          )}
+        </div>
+
+        <div className="hidden w-full overflow-x-auto scrollbar-hide md:block">
+          <table className="w-full min-w-xl text-left text-sm sm:min-w-2xl md:min-w-4xl">
             <thead>
               <tr className="border-b border-[#1F1F1F] text-gray-500 text-[10px] font-mono uppercase tracking-wider bg-black/40">
                 <th className="px-6 py-4">Task Name</th>
@@ -196,10 +228,10 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
                 paginatedLogs.map((log) => {
                   return (
                     <tr key={log._id} className="border-b border-[#1F1F1F]/50 hover:bg-white/2 transition-colors">
-                      <td className="px-6 py-4 font-bold max-w-75 truncate">{log.taskName}</td>
+                      <td className="max-w-52 px-4 py-4 font-bold truncate sm:max-w-75 sm:px-6">{log.taskName}</td>
                       <td className="px-6 py-4 font-mono text-gray-300">{formatTime(log.actualDurationSeconds)}</td>
                       <td className="px-6 py-4 font-mono text-gray-400 text-xs">
-                        {new Date(log.startTime).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                        {formatLogDate(log.startTime)}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <button onClick={() => handleDeleteLog(log._id, log.taskName)} className="p-2 text-gray-600 hover:text-red-500 hover:bg-red-500/10 rounded transition-all">
@@ -216,18 +248,20 @@ export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps)
 
         {/* 4. PAGINATION */}
         {totalPages > 1 && (
-          <div className="flex flex-col sm:flex-row justify-between items-center mt-6 px-6 gap-4">
+          <div className="mt-6 flex flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6">
             <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
               Showing <span className="text-white font-bold">{startIndex + 1}</span> - <span className="text-white font-bold">{Math.min(startIndex + itemsPerPage, filteredLogs.length)}</span> of <span className="text-white font-bold">{filteredLogs.length}</span> entries
             </span>
-            <div className="flex gap-2">
+            <div className="flex w-full items-center justify-center gap-2 sm:w-auto">
               <button disabled={currentPage === 1} onClick={() => setCurrentPage(c => c - 1)} className="px-3 py-1 font-mono text-[10px] border border-[#1F1F1F] rounded text-gray-400 hover:text-white hover:border-primary/50 disabled:opacity-30">PREV</button>
+              <div className="max-w-[45vw] overflow-x-auto scrollbar-hide sm:max-w-none">
               <div className="flex gap-1 sm:flex">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <button key={p} onClick={() => setCurrentPage(p)} className={`w-7 py-1 font-mono text-[10px] border rounded transition-all ${currentPage === p ? 'border-primary text-primary bg-primary/10 font-bold' : 'border-[#1F1F1F] text-gray-500 hover:text-white'}`}>
                     {p}
                   </button>
                 ))}
+              </div>
               </div>
               <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(c => c + 1)} className="px-3 py-1 font-mono text-[10px] border border-[#1F1F1F] rounded text-gray-400 hover:text-white hover:border-primary/50 disabled:opacity-30">NEXT</button>
             </div>

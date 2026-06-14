@@ -43,13 +43,13 @@ export default function ProductivityTrend({ data, error, isLoading }: Productivi
   if (isLoading) return <div className="p-6">Loading...</div>;
   if (error) return <div className="p-6">Failed to load trend data.</div>;
   return (
-    <section className="bg-[#111] border border-[#1F1F1F] p-6 rounded-xl h-full flex flex-col justify-between">
+    <section className="flex h-full flex-col justify-between rounded-xl border border-[#1F1F1F] bg-[#111] p-4 sm:p-6">
       <div>
         <span className="font-mono text-[10px] text-primary uppercase tracking-widest">Efficiency Wave</span>
         <h3 className="text-xl font-bold mt-1 text-white">Weekly Focus Trend</h3>
       </div>
       
-      <div className="relative h-48 w-full mt-6 select-none">
+      <div className="relative mt-6 h-44 w-full select-none sm:h-48">
         <svg viewBox="0 0 500 120" className="w-full h-full overflow-visible">
           <defs>
             <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
@@ -65,7 +65,7 @@ export default function ProductivityTrend({ data, error, isLoading }: Productivi
         </svg>
 
         {/* Labels */}
-        <div className="absolute bottom-0 w-full flex justify-between px-7 font-mono text-[10px] text-gray-500 uppercase mt-2">
+        <div className="absolute bottom-0 mt-2 flex w-full justify-between px-3 font-mono text-[9px] uppercase text-gray-500 sm:px-7 sm:text-[10px]">
           {data.map((d, i) => <span key={i}>{d.date || d._id}</span>)}
         </div>
       </div>

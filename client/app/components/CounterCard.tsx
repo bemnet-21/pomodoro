@@ -228,14 +228,14 @@ const CounterCard = ({ onSessionComplete, durations, longBreakInterval }: Counte
       />
 
       <div 
-        className="w-[90%] md:w-[75%] max-w-3xl h-120 bg-[#111111] flex flex-col justify-between items-center rounded-2xl px-6 py-12 transition-all duration-700"
+        className="flex min-h-[31rem] w-full max-w-3xl flex-col items-center justify-between rounded-2xl bg-[#111111] px-3 py-7 transition-all duration-700 sm:min-h-[36rem] sm:px-6 sm:py-10 md:w-[82%] md:px-8 md:py-12"
         style={{
           borderColor: `rgba(${currentTheme.rgb}, 0.3)`,
           borderWidth: '1px',
           boxShadow: isActive ? `0 0 60px rgba(${currentTheme.rgb}, 0.15)` : '0 0 0px rgba(0,0,0,0)'
         }}
       >
-        <nav className="w-full md:w-[60%] flex justify-between text-gray-500 font-mono text-xs md:text-sm tracking-widest">
+        <nav className="grid w-full grid-cols-3 gap-2 text-center font-mono text-[10px] tracking-[0.12em] text-gray-500 sm:text-xs md:w-[70%] md:text-sm">
         {(Object.keys(modes) as ModeKey[]).map((key) => (
           <button
             key={key}
@@ -252,7 +252,7 @@ const CounterCard = ({ onSessionComplete, durations, longBreakInterval }: Counte
 
         <div className="flex flex-col items-center gap-y-4 w-full">
         <div 
-          className="text-7xl md:text-[9rem] font-bold tracking-tighter font-mono tabular-nums transition-colors duration-700"
+          className="font-mono text-[2.7rem] font-bold tracking-tighter tabular-nums transition-colors duration-700 sm:text-7xl md:text-[9rem]"
           style={{ color: isActive ? currentTheme.color : '#FFFFFF' }}
         >
           {formatTime(timeLeft)}
@@ -268,7 +268,7 @@ const CounterCard = ({ onSessionComplete, durations, longBreakInterval }: Counte
             }
           }}
           disabled={isActive}
-          className="bg-transparent text-center text-gray-400 text-sm md:text-base border-b border-transparent hover:border-gray-700 focus:border-gray-500 focus:outline-none focus:text-white transition-all w-3/4 max-w-md disabled:hover:border-transparent disabled:opacity-50"
+          className="w-full max-w-md border-b border-transparent bg-transparent px-2 text-center text-sm text-gray-400 transition-all hover:border-gray-700 focus:border-gray-500 focus:text-white focus:outline-none disabled:opacity-50 disabled:hover:border-transparent md:text-base"
           placeholder="What are you focusing on?"
         />
         {taskNameError && (
@@ -276,10 +276,10 @@ const CounterCard = ({ onSessionComplete, durations, longBreakInterval }: Counte
         )}
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
         <button 
           onClick={toggleTimer}
-          className="relative isolate w-fit p-6 rounded-full cursor-pointer transition-transform active:scale-95"
+          className="relative isolate w-fit cursor-pointer rounded-full p-4 transition-transform active:scale-95 sm:p-6"
           style={{ backgroundColor: currentTheme.color }}
         >
           <div 

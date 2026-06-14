@@ -51,8 +51,8 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-white py-10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 space-y-6">
+    <div className="min-h-screen bg-background py-6 text-white sm:py-8 lg:py-10">
+      <div className="mx-auto max-w-7xl space-y-6 px-4 sm:px-6 lg:px-10">
         <Link
           href="/profile"
           className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-gray-400 hover:text-white transition-colors"
@@ -62,10 +62,10 @@ export default function ChangePasswordPage() {
 
         <header>
           <span className="text-primary font-mono text-xs tracking-widest uppercase">Security Center</span>
-          <h1 className="text-4xl font-bold tracking-tighter mt-2">Change Password</h1>
+          <h1 className="mt-2 text-3xl font-bold tracking-tighter sm:text-4xl">Change Password</h1>
         </header>
 
-        <section className="bg-[#111] border border-[#1F1F1F] p-6 rounded-xl max-w-2xl">
+        <section className="max-w-2xl rounded-xl border border-[#1F1F1F] bg-[#111] p-5 sm:p-6">
           <div className="mb-6">
             <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <KeyRound className="w-5 h-5 text-primary" /> Credentials Update

@@ -53,7 +53,7 @@ export default function ManualLogForm({ onClose, onSubmit }: ManualLogFormProps)
         onClose={() => setModalMessage('')}
       />
 
-      <form onSubmit={handleSubmit} className="bg-primary/5 border border-primary/20 rounded-xl p-6 animate-in fade-in slide-in-from-top-4 duration-300">
+      <form onSubmit={handleSubmit} className="animate-in slide-in-from-top-4 fade-in rounded-xl border border-primary/20 bg-primary/5 p-4 duration-300 sm:p-6">
         <div className="flex justify-between items-center mb-6">
           <h4 className="text-sm font-mono font-bold text-primary uppercase tracking-wider flex items-center gap-2">
             <Plus className="w-4 h-4" /> Record Missing Session
@@ -99,9 +99,9 @@ export default function ManualLogForm({ onClose, onSubmit }: ManualLogFormProps)
             </div>
           </div>
 
-          <div className="md:col-span-12 border-t border-[#1F1F1F] pt-6 flex justify-between items-center">
+          <div className="md:col-span-12 flex items-center justify-between border-t border-[#1F1F1F] pt-6">
 
-            <button type="submit" className="bg-primary text-black font-mono font-bold text-sm py-3 px-8 rounded hover:bg-primary/80 active:scale-95 transition-all">
+            <button type="submit" className="w-full rounded bg-primary px-8 py-3 text-sm font-bold font-mono text-black transition-all hover:bg-primary/80 active:scale-95 sm:w-auto">
               SAVE RECORD
             </button>
           </div>

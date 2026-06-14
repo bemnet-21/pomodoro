@@ -18,11 +18,11 @@ export default function HistoryPage() {
     return <div className="min-h-screen flex items-center justify-center text-gray-500">Loading session logs...</div>;
   }
   return (
-    <div className="min-h-screen bg-background text-white py-10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <header className="mb-10">
+    <div className="min-h-screen bg-background py-6 text-white sm:py-8 lg:py-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <header className="mb-8 sm:mb-10">
           <span className="text-primary font-mono text-xs tracking-widest uppercase">Raw Data Ledger</span>
-          <h1 className="text-4xl font-bold tracking-tighter mt-2">Session History</h1>
+          <h1 className="mt-2 text-3xl font-bold tracking-tighter sm:text-4xl">Session History</h1>
         </header>
 
         <HistoryDashboard initialLogs={logs} />

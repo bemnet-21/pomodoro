@@ -71,13 +71,13 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background font-sans selection:bg-primary selection:text-white">
+    <main className="relative flex min-h-screen items-center justify-center bg-background px-4 py-6 font-sans selection:bg-primary selection:text-white sm:px-6 lg:px-10">
       <div className="absolute inset-0 z-0 flex justify-center items-center pointer-events-none overflow-hidden">
         <div className="w-200 h-200 bg-primary opacity-[0.03] rounded-full blur-[120px]" />
       </div>
 
       {/* The Timer Card */}
-      <div className="z-10 w-full flex justify-center">
+      <div className="z-10 flex w-full justify-center">
         <CounterCard
           key={`${settings.workDuration}-${settings.shortBreak}-${settings.longBreak}-${settings.longBreakInterval}`}
           onSessionComplete={handleSessionComplete}
