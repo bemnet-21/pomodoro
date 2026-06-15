@@ -24,7 +24,7 @@ interface WeeklyData {
 
 interface SummaryData {
   currentStreak: number; 
-  totalFocusMinutes: number; 
+  totalFocusHours: number; 
   totalSessions: number; 
   lastActive: string; 
 }

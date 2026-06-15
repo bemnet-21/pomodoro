@@ -1,6 +1,6 @@
 export interface SummaryData {
   currentStreak: number;
-  totalFocusMinutes: number;
+  totalFocusHours: number;
   totalSessions: number;
   lastActive: string;
 }
@@ -38,7 +38,7 @@ export default function StreakStats({ data, error, isLoading }: StreakStatsProps
         <div className="grid grid-cols-2 gap-4 border-t border-primary/10 pt-6">
           <div>
             <p className="text-gray-500 font-mono text-[10px] uppercase mb-1">Total Hours</p>
-            <p className="text-2xl font-bold text-white">{(data.totalFocusMinutes / 60).toFixed(1)}</p>
+            <p className="text-2xl font-bold text-white">{(data.totalFocusHours / 60).toFixed(1)}</p>
           </div>
           <div>
             <p className="text-gray-500 font-mono text-[10px] uppercase mb-1">Sessions</p>
