@@ -267,9 +267,10 @@ const CounterCard = ({ onSessionComplete, durations, longBreakInterval }: Counte
               setTaskNameError('');
             }
           }}
+          aria-label="Task name"
           disabled={isActive}
-          className="w-full max-w-md border-b border-transparent bg-transparent px-2 text-center text-sm text-gray-400 transition-all hover:border-gray-700 focus:border-gray-500 focus:text-white focus:outline-none disabled:opacity-50 disabled:hover:border-transparent md:text-base"
-          placeholder="What are you focusing on?"
+          className="w-full max-w-md rounded-md border border-[#2A2A2A] bg-[#0F0F0F]/70 px-3 py-2 text-center text-sm text-gray-300 placeholder:text-gray-500 transition-colors hover:border-[#3A3A3A] focus:border-gray-500 focus:text-white focus:outline-none disabled:opacity-50 disabled:hover:border-[#2A2A2A] md:text-base"
+          placeholder="Name your task (e.g., Draft project proposal)"
         />
         {taskNameError && (
           <p className="text-xs font-mono text-red-400 tracking-wide">{taskNameError}</p>
