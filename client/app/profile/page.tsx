@@ -62,7 +62,7 @@ export default function ProfilePage() {
               error={settingsError}
               isLoading={settingsLoading}
             />
-            <AutomationSettings settings={settings} onSave={handleUpdateSettings} />
+            {/* <AutomationSettings settings={settings} onSave={handleUpdateSettings} /> */}
           </div>
         </div>
       </div>
