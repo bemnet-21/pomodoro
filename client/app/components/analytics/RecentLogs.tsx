@@ -1,13 +1,7 @@
-export interface SessionLog {
-  _id: string;
-  taskName: string;
-  sessionType: string; 
-  actualDurationSeconds: number;
-  startTime: string;
-}
+import type { RecentLog } from '../../types/analytics';
 
 export interface RecentLogsProps {
-  logs: SessionLog[];
+  logs: RecentLog[];
   error: Error | null;
   isLoading: boolean;
 }

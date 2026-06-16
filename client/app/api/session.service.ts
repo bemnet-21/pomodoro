@@ -1,4 +1,4 @@
-import { CreateSessionPayload } from "../components/history/HistoryDashboard"
+import type { CreateSessionPayload } from "../types/history"
 import apiClient from "./client"
 
 export const getRecentSessionLogs = async (limit: number) => {

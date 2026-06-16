@@ -1,10 +1,6 @@
 "use client";
 import { useMemo, useState } from 'react';
-
-export interface HeatmapData {
-  _id: string; // Expected format: "YYYY-MM-DD"
-  count: number;
-}
+import type { HeatmapData } from '../../types/analytics';
 
 export interface HeatmapProps {
   data: HeatmapData[];

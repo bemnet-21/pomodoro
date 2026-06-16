@@ -2,7 +2,8 @@
 
 import useSWR from "swr";
 import { getRecentSessionLogs } from "../api/session.service";
-import HistoryDashboard, { SessionLog } from "../components/history/HistoryDashboard";
+import HistoryDashboard from "../components/history/HistoryDashboard";
+import type { SessionLog } from "../types/history";
 
 
 

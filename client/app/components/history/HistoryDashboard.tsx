@@ -7,35 +7,13 @@ import ManualLogForm from './ManualLogForm';
 import { addSessionLog, deleteSessionLog } from '@/app/api/session.service';
 import AlertModal from '../ui/AlertModal';
 import ConfirmModal from '../ui/ConfirmModal';
-
-export interface SessionLog {
-  _id: string;
-  taskName: string;
-  tags: string[]; 
-  sessionType: 'work' | 'short-break' | 'long-break';
-  actualDurationSeconds: number;
-  startTime: string; 
-}
+import type { SessionLog, CreateSessionPayload } from '../../types/history';
 
 interface HistoryDashboardProps {
   initialLogs: SessionLog[];
 }
 
 type SortOption = 'date-desc' | 'date-asc' | 'duration-desc';
-
-export interface NewLog {
-    taskName: string;
-    sessionType: 'work' | 'short-break' | 'long-break';
-    actualDurationSeconds: number;
-    startTime: string; 
-    endTime: string;
-    status: 'completed' | 'abandoned';
-    plannedDurationSeconds: number;
-  }
-
-export type CreateSessionPayload = Omit<NewLog, 'status'> & {
-  status: 'completed';
-};
 
 export default function HistoryDashboard({ initialLogs }: HistoryDashboardProps) {
   const [logs, setLogs] = useState<SessionLog[]>(initialLogs);

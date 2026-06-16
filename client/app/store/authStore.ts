@@ -2,22 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-interface AuthUser {
-  _id?: string;
-  username?: string;
-  email?: string;
-}
-
-interface AuthState {
-  token: string | null;
-  user: AuthUser | null;
-  isAuthenticated: boolean;
-  hasHydrated: boolean;
-  setAuth: (payload: { token: string; user?: AuthUser | null }) => void;
-  logout: () => void;
-  setHasHydrated: (value: boolean) => void;
-}
+import type { AuthState } from "../types/auth";
 
 export const useAuthStore = create<AuthState>()(
   persist(

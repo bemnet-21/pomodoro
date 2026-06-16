@@ -1,10 +1,6 @@
 "use client";
 import { useState } from "react";
-
-export interface TagData {
-  _id: string; // The tag name
-  totalMinutes: number;
-}
+import type { TagData } from '../../types/analytics';
 
 export interface TagDistributionProps {
   data: TagData[];
@@ -14,6 +10,9 @@ export interface TagDistributionProps {
 
 export default function TagDistribution({ data, error, isLoading }: TagDistributionProps) {
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
+
+  if (isLoading) return <div className="p-6">Loading...</div>;
+  if (error) return <div className="p-6">Failed to load tag distribution.</div>;
   
   const radius = 40;
   const circumference = 2 * Math.PI * radius;

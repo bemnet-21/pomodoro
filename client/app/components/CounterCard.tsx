@@ -1,7 +1,7 @@
 "use client";
 import { Play, Pause, RefreshCcw, Square } from 'lucide-react';
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { NewLog } from './history/HistoryDashboard';
+import type { NewLog } from '../types/history';
 import ConfirmModal from './ui/ConfirmModal';
 
 const MODE_THEME = {

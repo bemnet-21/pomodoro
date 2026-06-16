@@ -1,9 +1,4 @@
-export interface SummaryData {
-  currentStreak: number;
-  totalFocusHours: number;
-  totalSessions: number;
-  lastActive: string;
-}
+import type { SummaryData } from "../../types/analytics";
 
 export interface StreakStatsProps {
   data: SummaryData;

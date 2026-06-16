@@ -1,7 +1,7 @@
 "use client";
 import { addSessionLog } from "./api/session.service";
 import CounterCard from "./components/CounterCard";
-import { CreateSessionPayload, NewLog } from "./components/history/HistoryDashboard";
+import type { CreateSessionPayload, NewLog } from "./types/history";
 import { getUserSettings } from "./api/user.service";
 import type { UserSettings } from "./types/profile";
 import useSWR from "swr";

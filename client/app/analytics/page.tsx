@@ -9,33 +9,7 @@ import StreakStats from "../components/analytics/StreakStats";
 import { getUserSummary } from "../api/user.service";
 import RecentLogs from "../components/analytics/RecentLogs";
 import { getRecentSessionLogs } from "../api/session.service";
-
-
-interface HeatmapData {
-  _id: string; 
-  count: number; 
-}
-
-interface WeeklyData {
-  _id: number; 
-  totalMinutes: number; 
-  date: string; 
-}
-
-interface SummaryData {
-  currentStreak: number; 
-  totalFocusHours: number; 
-  totalSessions: number; 
-  lastActive: string; 
-}
-
-interface RecentLog {
-  _id: string;
-  taskName: string;
-  sessionType: string; 
-  actualDurationSeconds: number;
-  startTime: string;
-}
+import type { HeatmapData, WeeklyData, SummaryData, RecentLog } from "../types/analytics";
 
 export default function AnalyticsPage() {
 

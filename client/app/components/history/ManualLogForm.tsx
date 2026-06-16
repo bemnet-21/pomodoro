@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Plus, X } from 'lucide-react';
-import { SessionLog } from './HistoryDashboard';
+import type { SessionLog } from '../../types/history';
 import AlertModal from '../ui/AlertModal';
 
 interface ManualLogFormProps {

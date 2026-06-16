@@ -1,14 +1,9 @@
 "use client";
 import { useMemo } from 'react';
-
-export interface TrendData {
-  _id: number; 
-  totalMinutes: number;
-  date?: string; 
-}
+import type { WeeklyData } from '../../types/analytics';
 
 export interface ProductivityTrendProps {
-  data: TrendData[];
+  data: WeeklyData[];
   error: Error;
   isLoading: boolean;
 }
